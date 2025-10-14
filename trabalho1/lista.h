@@ -31,15 +31,16 @@ typedef struct {
 void inicializarLista(Lista *lista);
 void inserirNoFim(Lista *lista, void *dados);
 void *buscarElemento(Lista *lista, int (*criterio)(void*, void*), void *chave);
-int removerElemento(Lista *lista, int (*criterio)(void*, void*), void *chave);
+int removerElemento(Lista *lista, int (*criterio)(void*, void*), void *chave, void (*liberarDados)(void*));
+void liberarLista(Lista *lista, void (*liberarDados)(void*));
 void percorrerLista(Lista *lista, void (*mostrar)(void*));
-void liberarLista(Lista *lista);
+
 
 // Funções para lista com cabeçalho
 void inicializarListaCabecalho(ListaCabecalho *lista);
 void inserirNoFimCabecalho(ListaCabecalho *lista, void *dados);
 void percorrerListaCabecalho(ListaCabecalho *lista, void (*mostrar)(void*));
-void liberarListaCabecalho(ListaCabecalho *lista);
+void liberarListaCabecalho(ListaCabecalho *lista, void (*liberarDados)(void*));
 
 
 #endif

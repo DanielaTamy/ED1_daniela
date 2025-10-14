@@ -9,7 +9,7 @@
 // Lista simples
 // -------------------------------
 
-// Inicializa uma lista encadeada simples
+// Inicializa uma lista encadeada simples (para paciente)
 void inicializarLista(Lista *lista) {
     lista->inicio = NULL;
     lista->tamanho = 0;
@@ -32,7 +32,7 @@ void inserirNoFim(Lista *lista, void *dados) {
     lista->tamanho++;
 }
 
-// Busca um elemento usando uma função de critério (ex: comparar CPF)
+// Busca um elemento usando uma função de critério (para comparar CPF)
 void *buscarElemento(Lista *lista, int (*criterio)(void*, void*), void *chave) {
     No *aux = lista->inicio;
     while (aux != NULL) {
@@ -44,7 +44,7 @@ void *buscarElemento(Lista *lista, int (*criterio)(void*, void*), void *chave) {
 }
 
 // Remove elemento conforme critério
-int removerElemento(Lista *lista, int (*criterio)(void*, void*), void *chave) {
+int removerElemento(Lista *lista, int (*criterio)(void*, void*), void *chave, void (*liberarDados)(void*)) {
     No *anterior = NULL;
     No *atual = lista->inicio;
 
@@ -55,17 +55,21 @@ int removerElemento(Lista *lista, int (*criterio)(void*, void*), void *chave) {
             } else {
                 anterior->proximo = atual->proximo;
             }
-            free(atual);
+            if (liberarDados != NULL) {
+                liberarDados(atual->dados); //libera a memoria do paciente
+            }
+
+            free(atual); //libera a memória do nó
             lista->tamanho--;
-            return 1; // sucesso
+            return 1;
         }
         anterior = atual;
         atual = atual->proximo;
     }
-    return 0; // não encontrado
+    return 0;
 }
 
-// Percorre e aplica função de exibição
+//percorre e aplica função que mostra em cada elemento
 void percorrerLista(Lista *lista, void (*mostrar)(void*)) {
     No *aux = lista->inicio;
     while (aux != NULL) {
@@ -74,11 +78,15 @@ void percorrerLista(Lista *lista, void (*mostrar)(void*)) {
     }
 }
 
-// Libera toda a lista
-void liberarLista(Lista *lista) {
+//libera toda a lista
+void liberarLista(Lista *lista, void (*liberarDados)(void*)) {
     No *aux = lista->inicio;
     while (aux != NULL) {
         No *prox = aux->proximo;
+        if (liberarDados != NULL) {
+            liberarDados(aux->dados); //libera a memoria do dado
+        }
+
         free(aux);
         aux = prox;
     }
@@ -122,14 +130,18 @@ void percorrerListaCabecalho(ListaCabecalho *lista, void (*mostrar)(void*)) {
 }
 
 // Libera memória da lista com cabeçalho
-void liberarListaCabecalho(ListaCabecalho *lista) {
+void liberarListaCabecalho(ListaCabecalho *lista, void (*liberarDados)(void*)) {
     No *aux = lista->cabeca->proximo;
     while (aux != NULL) {
         No *prox = aux->proximo;
-        free(aux);
+        // Usa a função de callback para liberar os dados (ex: o Agendamento)
+        if (liberarDados != NULL && aux->dados != NULL) {
+            liberarDados(aux->dados);
+        }
+        free(aux); // Libera o nó
         aux = prox;
     }
-    free(lista->cabeca);
+    free(lista->cabeca); // Libera o nó sentinela
     lista->cabeca = NULL;
     lista->tamanho = 0;
 }
