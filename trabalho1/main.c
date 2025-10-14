@@ -39,6 +39,7 @@ void menuAgendamentos()
     printf("2. Listar por CPF\n");
     printf("3. Listar por sala\n");
     printf("4. Remover agendamento\n");
+    printf("5. Mostrar todos os agendamentos\n");
     printf("0. Voltar\n");
     printf("Escolha uma opcao: ");
 }
@@ -161,6 +162,10 @@ int main() {
                         printf("Agendamento removido com sucesso!\n");
                     else
                         printf("Agendamento nao encontrado.\n");
+                    break;
+                case 5:
+                    printf("\nLISTA DE TODOS OS AGENDAMENTOS:\n");
+                    percorrerListaCabecalho(&listaAgendamentos, mostrarAgendamento);
                     break;
                 }
             } while (opcaoSub != 0);
