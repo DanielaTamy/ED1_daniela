@@ -18,6 +18,7 @@ typedef struct {
     char sala[10];
     char data[11];
     char hora[6];
+    int status;
 } Agendamento;
 
 // Estrutura de chave auxiliar para busca/remoção
@@ -26,14 +27,27 @@ typedef struct {
     char data[11];
 } ChaveAgendamento;
 
+// Estrutura de historico (MODIFICADA)
+typedef struct Historico {
+    int total_agendamentos;
+    int agendamentos_ativos;
+    int agendamentos_cancelados;
+    ListaCabecalho registros;
+} Historico;
+
 // Funções principais
 Agendamento* criarAgendamento(char *cpf, char *sala, char *data, char *hora);
-void cadastrarAgendamento(ListaCabecalho *lista, char *cpf_paciente);
+void cadastrarAgendamento(ListaCabecalho *lista, Historico *historico, char *cpf_paciente);
 void listarAgendamentosPorCPF(ListaCabecalho *lista, ListaPacientes *pacientes, char *cpf);
 void listarAgendamentosPorSala(ListaCabecalho *lista, ListaPacientes *pacientes, char *sala);
-int removerAgendamento(ListaCabecalho *lista, char *cpf, char *data);
+int removerAgendamento(ListaCabecalho *lista, Historico *historico, char *cpf, char *data);
 void mostrarAgendamento(void *dados);
-void exibirHistorico(ListaCabecalho *lista);
 
+// Funções historico
+Historico* criarHistorico();
+void adicionarHistorico(Historico *historico, Agendamento *agendamento);
+void exibirHistorico(Historico *historico);
+void exibirEstatisticasHistorico(Historico *historico);
+void liberarHistorico(Historico *historico); // Função para liberar a memória do histórico
 
 #endif

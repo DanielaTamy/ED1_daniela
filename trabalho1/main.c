@@ -5,7 +5,7 @@
 #include "paciente.h"
 #include "lista.h"
 
-void limparBuffer() //funçã criada para limpar o biffer do teclado, para que nn apareça caracteres indesejados
+void limparBuffer() //função criada para limpar o biffer do teclado, para que nn apareça caracteres indesejados
 {
     int c;
     while ((c = getchar()) != '\n' && c != EOF) //ignora os caracteres ate o fim da linha
@@ -40,6 +40,7 @@ void menuAgendamentos()
     printf("3. Listar por sala\n");
     printf("4. Remover agendamento\n");
     printf("5. Mostrar todos os agendamentos\n");
+    printf("6. Exibir Historico\n");
     printf("0. Voltar\n");
     printf("Escolha uma opcao: ");
 }
@@ -48,6 +49,7 @@ int main() {
     ListaPacientes *listaPacientes = criarListaPacientes();
     ListaCabecalho listaAgendamentos;
     inicializarListaCabecalho(&listaAgendamentos);
+    Historico *historico = criarHistorico();
 
     int opcaoPrincipal = -1, opcaoSub = -1;
     char entrada[20]; // buffer para ler a entrada do teclado
@@ -131,7 +133,7 @@ int main() {
                         printf("Paciente nao encontrado, cadastre antes.\n");
                         break;
                     }
-                    cadastrarAgendamento(&listaAgendamentos, cpf);
+                    cadastrarAgendamento(&listaAgendamentos, historico, cpf);
                     break;
                 }
                 case 2:
@@ -158,7 +160,7 @@ int main() {
                     fgets(data, sizeof(data), stdin);
                     data[strcspn(data, "\n")] = 0;
 
-                    if (removerAgendamento(&listaAgendamentos, cpf, data))
+                    if (removerAgendamento(&listaAgendamentos, historico, cpf, data))
                         printf("Agendamento removido com sucesso!\n");
                     else
                         printf("Agendamento nao encontrado.\n");
@@ -166,6 +168,10 @@ int main() {
                 case 5:
                     printf("\nLISTA DE TODOS OS AGENDAMENTOS:\n");
                     percorrerListaCabecalho(&listaAgendamentos, mostrarAgendamento);
+                    break;
+                case 6:
+                    exibirHistorico(historico);
+                    exibirEstatisticasHistorico(historico);
                     break;
                 }
             } while (opcaoSub != 0);
@@ -177,6 +183,7 @@ int main() {
     printf("\nSaindo\n");
     liberarListaPacientes(listaPacientes);
     liberarListaCabecalho(&listaAgendamentos, free);
+    liberarHistorico(historico);
 
     return 0;
 }
