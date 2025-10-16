@@ -9,9 +9,9 @@ int compararCPF(void *dadosPaciente, void *chaveCPF) { //usada para comparar os 
 
 void mostrarPaciente(void *dadosPaciente) { //ensina a lista genérica como exibir todos os dados de um paciente
     Paciente *p = (Paciente*) dadosPaciente;
-    printf("Nome: %s\n", p->nome);
-    printf("Cpf: %s\n", p->cpf);
-    printf("Grr: %s\n", p->grr);
+    printf("Nome: %s |", p->nome);
+    printf("Cpf: %s |", p->cpf);
+    printf("Grr: %s |", p->grr);
     printf("Curso: %s\n", p->curso);
 }
 
