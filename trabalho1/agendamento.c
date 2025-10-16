@@ -119,14 +119,12 @@ int removerAgendamento(ListaCabecalho *lista, Historico *historico, char *cpf, c
             free(a);
             free(atual);
             lista->tamanho--;
-            printf("Agendamento removido com sucesso\n");
             return 1;
         }
         ant = atual;
         atual = atual->proximo;
     }
 
-    printf("Agendamento nao encontrado.\n");
     return 0;
 }
 
