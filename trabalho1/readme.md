@@ -10,6 +10,7 @@ Disciplina: Estrutura de Dados I - Professor Hélcio
 Daniela Tamy Yuki,
 Laura Klemba Cordeiro,
 Nathalia Lyra Varela de Albuquerque e
+Leonardo de Lima Pereira
 
 ---
 ## 🎯 Objetivo Geral
