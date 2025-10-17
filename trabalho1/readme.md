@@ -84,3 +84,27 @@ Interface interativa no terminal que permite ao usuário:
 
 
 ---
+
+## 🚀 Como Clonar e Executar o Projeto
+
+### 📥 1. Clonar o Repositório
+
+No terminal, execute:
+
+```bash
+git clone https://github.com/DanielaTamy/ED1_daniela.git
+
+
+cd ED1_daniela/trabalho1
+```
+
+Compilar o projeto: certifique de ter um compilado C instalado 
+
+```bash
+gcc main.c paciente.c agendamento.c lista.c -o main.exe
+```
+
+Executar o sistema
+```bash
+./main.exe
+```
