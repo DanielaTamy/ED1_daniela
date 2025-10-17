@@ -53,8 +53,8 @@ void cadastrarPaciente(ListaPacientes *lista, char nome[], char cpf[], char grr[
         return;
     }
     //copia os dados para a estrutura nova (pacienre novo)
-    strncpy(novoPaciente->nome, nome, sizeof(novoPaciente->nome) - 1);
-    novoPaciente->nome[sizeof(novoPaciente->nome) - 1] = '\0';
+    strncpy(novoPaciente->nome, nome, sizeof(novoPaciente->nome) - 1); //copia o nome, mas não deixa estourar o buffer - pega os 100 caracteres e diminui 1, para garantir o \0
+    novoPaciente->nome[sizeof(novoPaciente->nome) - 1] = '\0'; //como ali em cima ainda pode dar erro, é necessário essa linha para garantir de vez o /0 no final
     strncpy(novoPaciente->cpf, cpf, sizeof(novoPaciente->cpf) - 1);
     novoPaciente->cpf[sizeof(novoPaciente->cpf) - 1] = '\0';
     strncpy(novoPaciente->grr, grr, sizeof(novoPaciente->grr) - 1);
@@ -66,19 +66,19 @@ void cadastrarPaciente(ListaPacientes *lista, char nome[], char cpf[], char grr[
     inserirNoFim(lista, novoPaciente);
 }
 
-Paciente* buscarPacientePorCPF(ListaPacientes *lista, char cpf[]) {
-    //chama a função, passando o callback do cpf (comparar)
-    return (Paciente*) buscarElemento(lista, compararCPF, cpf);
-}
+Paciente* buscarPacientePorCPF(ListaPacientes *lista, char cpf[]) { //chama a função, passando o callback do cpf (para comparar cpf)
+    return (Paciente*) //quando a função "buscarPacienteporCPF" é chamada, ela vai ser obrigada a retornar um paciente 
+    buscarElemento(lista, compararCPF, cpf); //porém, a função "buscarElemento" retorna um valor genérico, por isso, é necessário a parte do return paciente*
+} //busca um paciente na lista, comparando o CPF informado com o CPF armazenado em cada nó da lista.
 
 void exibirPacientes(ListaPacientes *lista) {
-    if (lista == NULL || lista->tamanho == 0) {
+    if (lista == NULL || lista->tamanho == 0) { //se a lista for NULL ou vazia, avisa que não há pacientes cadastrados
         printf("\nNenhum paciente cadastrado no sistema.\n");
         return;
     }
-    printf("\n=== Lista de Pacientes Cadastrados ===\n");
-    //chama a função, passando o callback que mostra os dados do paciente (usado pra saber que é um paciente)
-    percorrerLista(lista, mostrarPaciente);
+    printf("\n=== Lista de Pacientes Cadastrados ===\n"); 
+    percorrerLista(lista, mostrarPaciente); //chama a função genérica "percorrerLista" que esta em paciente.c e percorre cada nó da lista
+    //e para cada nó, chama a função "mostrarPaciente" que vai traduzir esse valor genérico nos dados de um paciente
 }
 
 int removerPacientePorCPF(ListaPacientes *lista, char cpf[]) {
