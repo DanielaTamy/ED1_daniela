@@ -26,10 +26,6 @@ Agendamento* criarAgendamento(char *cpf, char *sala, char *data, char *hora) {
 void cadastrarAgendamento(ListaCabecalho *lista, Historico *historico, char *cpf_paciente) {
     char cpf[15], sala[10], data[15], hora[8];
 
-   /* printf("CPF do paciente: ");
-    fgets(cpf, sizeof(cpf), stdin);
-    cpf[strcspn(cpf, "\n")] = 0; */
-
     printf("Sala: ");
     fgets(sala, sizeof(sala), stdin);
     sala[strcspn(sala, "\n")] = 0;
