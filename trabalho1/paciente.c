@@ -1,7 +1,7 @@
 // ===============================================
 // paciente.c
 // Funções de Pacientes
-// Nathalia e Leonardo
+// Laura
 // ===============================================
 #include "paciente.h"
 #include <string.h> 
