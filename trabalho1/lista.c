@@ -1,6 +1,7 @@
 // ===============================================
 // lista.c
 // Implementação das funções de listas lineares
+// Daniela
 // ===============================================
 
 #include "lista.h"
@@ -9,7 +10,7 @@
 // Lista simples
 // -------------------------------
 
-// Inicializa uma lista encadeada simples (para paciente)
+// Inicializa uma lista vazia encadeada simples (para paciente)
 void inicializarLista(Lista *lista) {
     lista->inicio = NULL;
     lista->tamanho = 0;
@@ -32,7 +33,7 @@ void inserirNoFim(Lista *lista, void *dados) {
     lista->tamanho++;
 }
 
-// Busca um elemento usando uma função de critério (para comparar CPF)
+// Busca um elemento usando uma função de critério (compararCPF)
 void *buscarElemento(Lista *lista, int (*criterio)(void*, void*), void *chave) {
     No *aux = lista->inicio;
     while (aux != NULL) {
@@ -100,7 +101,7 @@ void liberarLista(Lista *lista, void (*liberarDados)(void*)) {
 
 // Inicializa a lista com cabeçalho
 void inicializarListaCabecalho(ListaCabecalho *lista) {
-    lista->cabeca = (No*) malloc(sizeof(No));  // nó sentinela
+    lista->cabeca = (No*) malloc(sizeof(No));  // nó sentinela 
     lista->cabeca->proximo = NULL;
     lista->cabeca->dados = NULL;
     lista->tamanho = 0;
@@ -108,9 +109,9 @@ void inicializarListaCabecalho(ListaCabecalho *lista) {
 
 // Insere no fim da lista com cabeçalho
 void inserirNoFimCabecalho(ListaCabecalho *lista, void *dados) {
-    No *novo = (No*) malloc(sizeof(No));
-    novo->dados = dados;
-    novo->proximo = NULL;
+    No *novo = (No*) malloc(sizeof(No)); //aloca memória para o novo nó
+    novo->dados = dados; //armazena os dados
+    novo->proximo = NULL; 
 
     No *aux = lista->cabeca;
     while (aux->proximo != NULL)
@@ -122,7 +123,7 @@ void inserirNoFimCabecalho(ListaCabecalho *lista, void *dados) {
 
 // Percorre lista com cabeçalho
 void percorrerListaCabecalho(ListaCabecalho *lista, void (*mostrar)(void*)) {
-    No *aux = lista->cabeca->proximo;
+    No *aux = lista->cabeca->proximo; //começa pelo primeiro elemento
     while (aux != NULL) {
         mostrar(aux->dados);
         aux = aux->proximo;

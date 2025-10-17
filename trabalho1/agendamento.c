@@ -1,6 +1,7 @@
 // ===============================================
 // agendamento.c
 // Funções de agendamento
+// Nathalia e Leonardo
 // ===============================================
 #include "paciente.h"
 #include "agendamento.h"
