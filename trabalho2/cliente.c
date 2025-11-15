@@ -9,18 +9,22 @@
 #include <string.h>
 #include "cliente.h"
 
-Cliente* criarCliente(char nome[], int tipo, int itens) {
-    Cliente* novo = (Cliente*) malloc(sizeof(Cliente));
-    if (!novo) return NULL;
-
-    strcpy(novo->nome, nome);
-    novo->tipo = tipo;
-    novo->itens = itens;
-    novo->tempoAtendimento = calcularTempoAtendimento(itens);
+Cliente criarCliente(char nome[], int tipo, int itens) {
+    Cliente novo;
+    
+    strcpy(novo.nome, nome);
+    novo.tipo = tipo;
+    novo.itens = itens;
+    novo.tempoAtendimento = calcularTempoAtendimento(itens);
 
     return novo;
 }
 
+void liberarCliente(Cliente* c) {
+    if (c) {
+        free(c);
+    }
+}
 
 void imprimirCliente(Cliente* c) {
     if (!c) return;

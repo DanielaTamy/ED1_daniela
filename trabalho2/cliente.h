@@ -15,7 +15,10 @@ typedef struct Cliente {
 } Cliente;
 
 // Cria um cliente dinamicamente
-Cliente* criarCliente(char nome[], int tipo, int itens);
+Cliente criarCliente(char nome[], int tipo, int itens);
+
+// Libera memória do cliente
+void liberarCliente(Cliente* c);
 
 // Exibe dados do cliente
 void imprimirCliente(Cliente* c);
