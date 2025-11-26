@@ -10,7 +10,7 @@
 // Lista simples
 // -------------------------------
 
-// Inicializa uma lista vazia encadeada simples (para paciente)
+// Inicializa uma lista encadeada simples
 void inicializarLista(Lista *lista) {
     lista->inicio = NULL;
     lista->tamanho = 0;
@@ -33,7 +33,7 @@ void inserirNoFim(Lista *lista, void *dados) {
     lista->tamanho++;
 }
 
-// Busca um elemento usando uma função de critério (compararCPF)
+// Busca um elemento usando uma função de critério (ex: comparar CPF)
 void *buscarElemento(Lista *lista, int (*criterio)(void*, void*), void *chave) {
     No *aux = lista->inicio;
     while (aux != NULL) {
