@@ -1,3 +1,8 @@
+// ===============================================
+// agendamento.c
+// Funções de agendamento
+// ===============================================
+
 #include "agendamento.h"
 #include "paciente.h"
 
@@ -11,16 +16,20 @@ Agendamento* criarAgendamento(char *cpf, char *sala, char *data, char *hora) {
     strcpy(novo->sala, sala);
     strcpy(novo->data, data);
     strcpy(novo->hora, hora);
+    // Por padrão, um novo agendamento está Ativo
+    novo->status = 1;
     return novo;
 }
 
-void cadastrarAgendamento(ListaCabecalho *lista, char *cpf_paciente) {
-    char cpf[15], sala[10], data[15], hora[8];
+// -----------------------------------------------------
+// Cadastra um agendamento (insere na lista com cabeçalho)
+// -----------------------------------------------------
+void cadastrarAgendamento(ListaCabecalho *lista) {
+    char cpf[15], sala[10], data[11], hora[6];
 
-   /* printf("CPF do paciente: ");
-    fgets(cpf, sizeof(cpf), stdin);
-    cpf[strcspn(cpf, "\n")] = 0; */
-
+    printf("\n--- CADASTRO DE AGENDAMENTO ---\n");
+    printf("CPF do paciente: ");
+    scanf("%s", cpf);
     printf("Sala: ");
     fgets(sala, sizeof(sala), stdin);
     sala[strcspn(sala, "\n")] = 0;
@@ -36,10 +45,33 @@ void cadastrarAgendamento(ListaCabecalho *lista, char *cpf_paciente) {
     Agendamento *novo = criarAgendamento(cpf_paciente, sala, data, hora);
     if (novo == NULL) return;
     inserirNoFimCabecalho(lista, novo);
-    printf("Agendamento cadastrado\n");
+
+    printf("Agendamento cadastrado com sucesso!\n");
 }
 
-void listarAgendamentosPorCPF(ListaCabecalho *lista, ListaPacientes *pacientes, char *cpf) {
+// -----------------------------------------------------
+// Função de comparação (usada para busca e remoção)
+// -----------------------------------------------------
+int compararAgendamento(void *dados, void *chave) {
+    Agendamento *a = (Agendamento*) dados;
+    ChaveAgendamento *c = (ChaveAgendamento*) chave;
+
+    return (strcmp(a->cpf, c->cpf) == 0) && (strcmp(a->data, c->data) == 0);
+}
+
+// -----------------------------------------------------
+// Mostra um agendamento na tela
+// -----------------------------------------------------
+void mostrarAgendamento(void *dados) {
+    Agendamento *a = (Agendamento*) dados;
+    printf("CPF: %s | Sala: %s | Data: %s | Hora: %s\n",
+           a->cpf, a->sala, a->data, a->hora);
+}
+
+// -----------------------------------------------------
+// Lista todos os agendamentos de um CPF
+// -----------------------------------------------------
+void listarAgendamentosPorCPF(ListaCabecalho *lista, char *cpf) {
     No *aux = lista->cabeca->proximo;
     int encontrados = 0;
     Paciente *p = buscarPacientePorCPF(pacientes, cpf);
@@ -61,7 +93,10 @@ void listarAgendamentosPorCPF(ListaCabecalho *lista, ListaPacientes *pacientes, 
         printf("Nenhum agendamento encontrado.\n");
 }
 
-void listarAgendamentosPorSala(ListaCabecalho *lista, ListaPacientes *pacientes, char *sala) {
+// -----------------------------------------------------
+// Lista todos os agendamentos de uma sala
+// -----------------------------------------------------
+void listarAgendamentosPorSala(ListaCabecalho *lista, char *sala) {
     No *aux = lista->cabeca->proximo;
     int encontrados = 0;
 
@@ -84,24 +119,27 @@ void listarAgendamentosPorSala(ListaCabecalho *lista, ListaPacientes *pacientes,
         printf("Nenhum agendamento encontrado.\n");
 }
 
+// -----------------------------------------------------
+// Remove um agendamento (usando CPF + data como chave)
+// -----------------------------------------------------
 int removerAgendamento(ListaCabecalho *lista, char *cpf, char *data) {
     No *ant = lista->cabeca;
     No *atual = lista->cabeca->proximo;
 
     while (atual != NULL) {
-        Agendamento *a = (Agendamento*) atual->dados;
-        if (strcmp(a->cpf, cpf) == 0 && strcmp(a->data, data) == 0) {
+        if (compararAgendamento(atual->dados, &chave)) {
             ant->proximo = atual->proximo;
             free(a);
             free(atual);
             lista->tamanho--;
-            printf("Agendamento removido com sucesso\n");
+            printf("🗑️  Agendamento removido com sucesso!\n");
             return 1;
         }
         ant = atual;
         atual = atual->proximo;
     }
 
-    printf("Agendamento nao encontrado.\n");
+    printf("5Agendamento não encontrado.\n");
     return 0;
 }
+

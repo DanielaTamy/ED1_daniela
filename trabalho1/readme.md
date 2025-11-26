@@ -10,6 +10,7 @@ Disciplina: Estrutura de Dados I - Professor Hélcio
 Daniela Tamy Yuki,
 Laura Klemba Cordeiro,
 Nathalia Lyra Varela de Albuquerque e
+Leonardo de Lima Pereira
 
 ---
 ## 🎯 Objetivo Geral
@@ -68,7 +69,42 @@ Interface interativa no terminal que permite ao usuário:
 
 ## 🧠 Estrutura de Dados Utilizada
 
-COMPLETAR
+### Lista encadeada simples
+- utilizada no módulo de Pacientes para armazenar dinamicamente os cadastros de forma simples e eficiente.
+- **Inserções dinâmicas:** Não há limite fixo de elementos.  
+- **Operações básicas suficientes:** O módulo de pacientes realiza principalmente cadastro e consultas, sem necessidade de manipulações complexas.  
+- **Leve e eficiente:** Menor sobrecarga estrutural, ideal para dados que só precisam crescer linearmente.
+
+
+### Lista encadeada com Cabeçalho
+- Armazenar e gerenciar agendamentos de consultas (CPF, sala, data e hora).
+- **Facilidade de manipulação:** A presença de um nó de cabeçalho simplifica inserções e remoções, evitando casos especiais para o início e fim da lista.  
+- **Flexibilidade:** Agendamentos são dados mais dinâmicos — com frequência de cadastro, cancelamento e listagem — exigindo uma estrutura mais robusta.  
+- **Organização:** O nó sentinela centraliza informações e facilita o gerenciamento do histórico completo de consultas.  
 
 
 ---
+
+## 🚀 Como Clonar e Executar o Projeto
+
+### 📥 1. Clonar o Repositório
+
+No terminal, execute:
+
+```bash
+git clone https://github.com/DanielaTamy/ED1_daniela.git
+
+
+cd ED1_daniela/trabalho1
+```
+
+Compilar o projeto: certifique de ter um compilado C instalado 
+
+```bash
+gcc main.c paciente.c agendamento.c lista.c -o main.exe
+```
+
+Executar o sistema
+```bash
+./main.exe
+```
