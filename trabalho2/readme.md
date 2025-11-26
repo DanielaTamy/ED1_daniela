@@ -50,8 +50,8 @@ Mostra a fila comum e preferencial em tempo real.
 ```
 src/
 │── main.c
-│── clientes.c / clientes.h
-│── filas.c / filas.h
+│── cliente.c / cliente.h
+│── fila.c / fila.h
 │── atendimento.c / atendimento.h
 README.md
 diario_de_bordo.pdf
@@ -60,7 +60,7 @@ diario_de_bordo.pdf
 ## ▶️ Como Compilar e Executar
 **Compilar:**
 ```
-gcc main.c clientes.c filas.c atendimento.c -o supermercado
+gcc main.c cliente.c fila.c atendimento.c -o supermercado.exe
 ```
 **Executar:**
 ```
@@ -70,14 +70,3 @@ gcc main.c clientes.c filas.c atendimento.c -o supermercado
 ## 🧪 Vídeo de Demonstração
 👉 *[Inserir link do YouTube aqui]*
 
-## 👥 Integrantes do Grupo
-| Nome | Contribuição |
-|------|--------------|
-| Nome 1 | Filas |
-| Nome 2 | Cadastro |
-| Nome 3 | Atendimento |
-| Nome 4 | Estatísticas |
-| Nome 5 | Integração |
-
-## 📘 Diário de Bordo
-See `diario_de_bordo.pdf`.
