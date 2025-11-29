@@ -67,6 +67,8 @@ gcc main.c cliente.c fila.c atendimento.c -o supermercado.exe
 ./supermercado
 ```
 
-## 🧪 Vídeo de Demonstração
-👉 *[Inserir link do YouTube aqui]*
+##  Vídeo do Projeto
+
+[![Projeto Fila Supermercado ED1](https://img.youtube.com/vi/s0KYqLz1UeA/maxresdefault.jpg)](https://youtu.be/s0KYqLz1UeA)
+
 
